@@ -15,9 +15,10 @@ defmodule GithubUserSearchApp.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: GithubUserSearchApp.PubSub},
       # Start the Endpoint (http/https)
-      GithubUserSearchAppWeb.Endpoint
+      GithubUserSearchAppWeb.Endpoint,
       # Start a worker by calling: GithubUserSearchApp.Worker.start_link(arg)
       # {GithubUserSearchApp.Worker, arg}
+      {Finch, name: MyFinch}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
