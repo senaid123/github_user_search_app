@@ -31,8 +31,6 @@ defmodule GithubUserSearchApp.UserGetter do
       "twitter_username" => twitter_username
     } = data
 
-
-
     %{
       avatar_url: avatar_url,
       bio: bio,
