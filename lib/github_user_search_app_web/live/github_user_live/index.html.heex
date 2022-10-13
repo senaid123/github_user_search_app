@@ -1,3 +1,17 @@
+ <div>
+ <form phx-submit="search">
+        <input type="text" name="search" value={@search}
+               placeholder="Search User"
+               autofocus autocomplete="off"
+    
+                />
+
+        <button type="submit">
+          <Icons.search />
+        </button>
+      </form>
+</div>
+<%= if @github_user do %> 
 <div class="m-20 bg-blue-300">
 <div class="ml-10">
 <img width="250px" class="rounded-3xl " src={@github_user.avatar_url} />
@@ -14,3 +28,4 @@
 <h2>Twitter Username : <%= @github_user.twitter_username%></h2>
 </div>
 </div>
+<% end %>
