@@ -33,6 +33,7 @@ defmodule GithubUserSearchApp.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
       {:finch, "~> 0.13"},
       {:phoenix, "~> 1.6.13"},
       {:phoenix_ecto, "~> 4.4"},
@@ -67,7 +68,7 @@ defmodule GithubUserSearchApp.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
-      "assets.deploy": ["esbuild default --minify", "phx.digest"]
+      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"]
     ]
   end
 end
