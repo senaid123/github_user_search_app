@@ -17,7 +17,7 @@ defmodule GithubUserSearchAppWeb.Router do
   scope "/", GithubUserSearchAppWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    live "/", GithubUserLive.Index, :index
   end
 
   # Other scopes may use custom stacks.
