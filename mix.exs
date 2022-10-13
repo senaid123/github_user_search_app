@@ -33,6 +33,7 @@ defmodule GithubUserSearchApp.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:finch, "~> 0.13"},
       {:phoenix, "~> 1.6.13"},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.6"},
@@ -44,12 +45,13 @@ defmodule GithubUserSearchApp.MixProject do
       {:phoenix_live_dashboard, "~> 0.6"},
       {:esbuild, "~> 0.4", runtime: Mix.env() == :dev},
       {:swoosh, "~> 1.3"},
+      {:timex, "~> 3.7"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
-      {:plug_cowboy, "~> 2.5"},
-      {:finch, "~> 0.13"}
+      {:plug_cowboy, "~> 2.5"}
+
     ]
   end
 
