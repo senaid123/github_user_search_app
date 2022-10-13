@@ -5,9 +5,10 @@ defmodule GithubUserSearchAppWeb.GithubUserLive.Index do
   alias GithubUserSearchAppWeb.GithubUserLive.Icons
 
   def mount(_params, _session, socket) do
+    {:ok, octocat} = UserGetter.get_github_user("octocat")
     socket =
       assign(socket,
-        github_user: nil,
+        github_user: octocat,
         search: "",
         loading: false
       )
@@ -21,7 +22,7 @@ defmodule GithubUserSearchAppWeb.GithubUserLive.Index do
     socket =
       assign(socket,
         github_user: nil,
-        search: "",
+        search: search,
         loading: true
       )
 
