@@ -1,3 +1,16 @@
-<div>
-search your user
+<div class="m-20 bg-blue-300">
+<div class="ml-10">
+<img width="250px" class="rounded-3xl " src={@github_user.avatar_url} />
+<h2>Full Name : <%= @github_user.name%></h2>
+<h2>Username : <%= @github_user.login%></h2>
+<h2>created : <%= @github_user.created_at %></h2>
+<h2>Bio : <%= @github_user.bio%></h2>
+<h2>Company : <%= @github_user.company %></h2>
+<h2>Followers : <%= @github_user.followers%></h2>
+<h2>Following : <%= @github_user.following%></h2>
+<h2>Link : <%= @github_user.html_url%></h2>
+<h2>location : <%= @github_user.location %></h2>
+<h2>Repos : <%= @github_user.public_repos %></h2>
+<h2>Twitter Username : <%= @github_user.twitter_username%></h2>
+</div>
 </div>

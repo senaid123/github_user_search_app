@@ -7,7 +7,7 @@ defmodule GithubUserSearchApp.UserGetter do
 
     with {:ok, %{status: 200, body: body}} <- json_data,
          {:ok, items} = Jason.decode(body) do
-      items = Stream.map(items, &parse_data/1)
+      items = parse_data(items)
 
       {:ok, items}
     else

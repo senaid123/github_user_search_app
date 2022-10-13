@@ -3,9 +3,11 @@ defmodule GithubUserSearchAppWeb.GithubUserLive.Index do
   alias GithubUserSearchApp.UserGetter
 
   def mount(_params, _session, socket) do
+    {:ok, user} = UserGetter.get_github_user("senaid123")
+
     socket =
       socket
-      |> assign(:user, nil)
+      |> assign(:github_user, user)
 
     {:ok, socket}
   end
