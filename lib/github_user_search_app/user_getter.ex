@@ -1,14 +1,13 @@
 defmodule GithubUserSearchApp.UserGetter do
   alias GithubUserSearchApp.User.GithubUser
+  alias GithubUserSearchApp.Helpers.UserGeterHelper
 
   def get_github_user(data) do
-    json_data =
-      Finch.build(:get, "https://api.github.com/users/" <> data)
-      |> Finch.request(MyFinch)
+    json_data = UserGeterHelper.get_user(data)
 
     with {:ok, %{status: 200, body: body}} <- json_data,
          {:ok, items} = Jason.decode(body) do
-      items = Stream.map(items, &parse_data(&1))
+      items = Stream.map(items, &parse_data/1)
 
       {:ok, items}
     else
@@ -32,11 +31,13 @@ defmodule GithubUserSearchApp.UserGetter do
       "twitter_username" => twitter_username
     } = data
 
+
+
     %{
       avatar_url: avatar_url,
       bio: bio,
       company: company,
-      created_at: created_at,
+      created_at: Timex.parse!(created_at, "{RFC3339}"),
       followers: followers,
       following: following,
       html_url: html_url,
