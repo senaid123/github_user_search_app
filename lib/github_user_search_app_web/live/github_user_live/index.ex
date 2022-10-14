@@ -6,6 +6,7 @@ defmodule GithubUserSearchAppWeb.GithubUserLive.Index do
 
   def mount(_params, _session, socket) do
     {:ok, octocat} = UserGetter.get_github_user("octocat")
+
     socket =
       assign(socket,
         github_user: octocat,
@@ -36,10 +37,12 @@ defmodule GithubUserSearchAppWeb.GithubUserLive.Index do
         {:noreply, socket}
 
       _ ->
+        {:ok, octocat} = UserGetter.get_github_user("octocat")
+
         socket =
           socket
           |> put_flash(:info, "No users matching \"#{search}\"")
-          |> assign(gitub_user: "", loading: false)
+          |> assign(gitub_user: octocat, loading: false)
 
         {:noreply, socket}
     end

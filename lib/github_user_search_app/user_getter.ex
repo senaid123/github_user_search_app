@@ -7,9 +7,9 @@ defmodule GithubUserSearchApp.UserGetter do
 
     with {:ok, %{status: 200, body: body}} <- json_data,
          {:ok, items} = Jason.decode(body) do
-      items = parse_data(items)
+          items = parse_data(items)
 
-      {:ok, items}
+        {:ok,items}
     else
       {_, json_data} -> {:error, json_data}
     end
@@ -35,7 +35,7 @@ defmodule GithubUserSearchApp.UserGetter do
       avatar_url: avatar_url,
       bio: bio,
       company: company,
-      created_at: Timex.parse!(created_at, "{RFC3339}"),
+      created_at: Timex.parse!(created_at, "{RFC3339z}"),
       followers: followers,
       following: following,
       html_url: html_url,

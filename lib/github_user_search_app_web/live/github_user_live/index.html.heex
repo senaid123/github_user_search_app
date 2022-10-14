@@ -1,5 +1,7 @@
- <div>
- <form phx-submit="search">
+ <div class="m-0 w-full h-[100vh] block  background">
+
+  <div>
+  <form phx-submit="search">
         <input type="text" name="search" value={@search}
                placeholder="Search User"
                autofocus autocomplete="off"
@@ -10,18 +12,24 @@
           <Icons.search />
         </button>
       </form>
-</div>
+  </div>
 
 <%= if @loading do %>
 <div>LOADIINGG....</div>
 <%else %>
+<%= if @github_user do %>
 <div class="m-20 bg-blue-300">
 <div class="ml-10">
-<img width="250px" class="rounded-3xl " src={@github_user.avatar_url} />
+<img width="250px" class="rounded-[50%] " src={@github_user.avatar_url} />
 <h2>Full Name : <%= @github_user.name%></h2>
-<h2>Username : <%= @github_user.login%></h2>
+<h2>Username : <%="@"<>@github_user.login%></h2>
 <h2>created : <%= @github_user.created_at %></h2>
-<h2>Bio : <%= @github_user.bio%></h2>
+<h2>Bio : <%=if @github_user.bio do %> 
+<%= @github_user.bio %>
+<%else%>
+ No bio 
+ <%end%>
+</h2>
 <h2>Company : <%= @github_user.company %></h2>
 <h2>Followers : <%= @github_user.followers%></h2>
 <h2>Following : <%= @github_user.following%></h2>
@@ -32,3 +40,6 @@
 </div>
 </div>
 <%end %>
+<%end %>
+
+</div>
