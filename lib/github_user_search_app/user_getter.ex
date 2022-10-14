@@ -1,5 +1,4 @@
 defmodule GithubUserSearchApp.UserGetter do
-  alias GithubUserSearchApp.User.GithubUser
   alias GithubUserSearchApp.Helpers.UserGeterHelper
 
   def get_github_user(data) do
@@ -7,9 +6,9 @@ defmodule GithubUserSearchApp.UserGetter do
 
     with {:ok, %{status: 200, body: body}} <- json_data,
          {:ok, items} = Jason.decode(body) do
-          items = parse_data(items)
+      items = parse_data(items)
 
-        {:ok,items}
+      {:ok, items}
     else
       {_, json_data} -> {:error, json_data}
     end
