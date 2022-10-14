@@ -1,15 +1,15 @@
- <div class="m-0 w-full h-[100vh] block  background">
-
-  <div>
-  <form phx-submit="search">
+ <div class="m-0 w-[100vw] h-[100vh] block  background">
+<div class="p-20">
+  <div class="bg-white flex mb-5">
+  <form phx-submit="search" class="flex">
         <input type="text" name="search" value={@search}
                placeholder="Search User"
                autofocus autocomplete="off"
-    
+               class="outline-0 border-none w-full"
                 />
 
-        <button type="submit">
-          <Icons.search />
+        <button type="submit" class="">
+          Search
         </button>
       </form>
   </div>
@@ -18,8 +18,8 @@
 <div>LOADIINGG....</div>
 <%else %>
 <%= if @github_user do %>
-<div class="m-20 bg-blue-300">
-<div class="ml-10">
+<div class="background-info">
+<div class="ml-20">
 <img width="250px" class="rounded-[50%] " src={@github_user.avatar_url} />
 <h2>Full Name : <%= @github_user.name%></h2>
 <h2>Username : <%="@"<>@github_user.login%></h2>
@@ -41,5 +41,5 @@
 </div>
 <%end %>
 <%end %>
-
+</div>
 </div>
