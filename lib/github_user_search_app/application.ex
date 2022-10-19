@@ -7,6 +7,13 @@ defmodule GithubUserSearchApp.Application do
 
   @impl true
   def start(_type, _args) do
+    if Application.get_env(:github_user_search_app, :env) == :dev do
+       # coveralls-ignore-start
+       Dotenv.load()
+       Mix.Task.run("loadconfig")
+       # coveralls-ignore-stop
+    end
+
     children = [
       # Start the Ecto repository
       GithubUserSearchApp.Repo,
