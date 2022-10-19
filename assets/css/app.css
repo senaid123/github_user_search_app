@@ -9,6 +9,9 @@
 .background-info {
   background-color: #1E2A47;
 }
+.background-button {
+  background-color: #0079FF;
+}
 
 /* Alerts and form errors used by phx.new */
 .alert {
