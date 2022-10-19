@@ -2,7 +2,7 @@ defmodule GithubUserSearchAppWeb.GithubUserLive.Index do
   use GithubUserSearchAppWeb, :live_view
   use Phoenix.HTML
   alias GithubUserSearchApp.UserGetter
-  alias GithubUserSearchAppWeb.GithubUserLive.Icons
+  alias GithubUserSearchAppWeb.Components.GithubUserSearchComponents
 
   def mount(_params, _session, socket) do
     {:ok, octocat} = UserGetter.get_github_user("octocat")
