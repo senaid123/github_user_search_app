@@ -7,9 +7,10 @@ defmodule GithubUserSearchApp.Helpers.UserGeterHelper do
   end
 
   def get_headers do
-    auth = System.get_env("AUTH")
     token = System.get_env("TOKEN")
 
-    headers = [{to_string(auth), to_string(token)}]
+    headers = [{"Authorization", token}]
+
+    headers
   end
 end
