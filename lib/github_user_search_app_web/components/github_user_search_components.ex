@@ -2,6 +2,7 @@ defmodule GithubUserSearchAppWeb.Components.GithubUserSearchComponents do
   use GithubUserSearchAppWeb, :component
 
   alias GithubUserSearchAppWeb.GithubUserLive.Icons
+  alias GithubUserSearchAppWeb.Helpers.UserBioHelper
 
   def github_search_component(assigns) do
     ~H"""
@@ -9,70 +10,61 @@ defmodule GithubUserSearchAppWeb.Components.GithubUserSearchComponents do
       <.nav_top />
       <.search_bar search={@search} />
 
-      <%= if @loading do %>
-        <div>LOADIINGG....</div>
-      <% else %>
-        <%= if @github_user do %>
-          <div class="background-info h-[444px] mt-4">
-            <div class="ml-20">
-              <div class="flex ">
-                <img width="117px" class="rounded-[50%] " src={@github_user.avatar_url} />
-                <div class="block w-full">
+      <%= if @github_user do %>
+        <%= if @loading do %>
+          <div class="items-center justify-center fixed">
+            <img width="500px" src="../images/spinner.webp" />
+            <h2 class="text-[100px] text-white">Loading</h2>
+          </div>
+        <% else %>
+          <div class="background-info h-[444px] mt-4 rounded-lg">
+            <div class="m-8">
+              <div class="flex p-">
+                <img width="117px" class="rounded-[50%] mt-8 " src={@github_user.avatar_url} />
+                <div class="block w-full mx-5 mt-10">
                   <div class="justify-between flex">
                     <div class="block">
                       <h2 class="text-white font-bold text-[26px]"><%= @github_user.name %></h2>
-                      <h2 class="text-[16px] text-[#0079FF]"><%= "@" <> @github_user.login %></h2>
+                      <a href={@github_user.html_url} class="text-[16px] text-[#0079FF]">
+                        <%= "@" <> @github_user.login %>
+                      </a>
                     </div>
                     <div>
                       <.created_at created_at={@github_user.created_at} />
                     </div>
                   </div>
-                  <div>
-                    <h2 class="text-white text-[15px]">
-                      <%= if @github_user.bio do %>
-                        <%= @github_user.bio %>
-                      <% else %>
-                        This profile has no bio
-                      <% end %>
-                    </h2>
+                  <div class="text-[15px] mt-3">
+                    <UserBioHelper.user_bio bio={@github_user.bio} />
                   </div>
                 </div>
               </div>
+              <div class="w-full h-full flex items-center justify-center ">
+                <div class="h-[185px] w-[480px] ml-[14%]">
+                  <div class="flex items-center mt-10 background py-5 rounded-lg">
+                    <UserBioHelper.table_data github_user={@github_user} />
+                  </div>
+                  <div class="flex items-center justify-between w-full  gap-4 my-12 text-[15px]">
+                    <div>
+                      <div class="flex items-center gap-3">
+                        <Icons.company />
+                        <UserBioHelper.user_company company={@github_user.company} />start
+                      </div>
+                      <div class="flex items-center gap-3 mt-3">
+                        <Icons.website />
+                        <UserBioHelper.website website={@github_user.html_url} />
+                      </div>
+                    </div>
 
-              <div class="">
-                <table>
-                  <tr>
-                    <td>Repos</td>
-                    <td>Followers</td>
-                    <td>Following</td>
-                  </tr>
-                  <tr>
-                    <td><%= @github_user.public_repos %></td>
-                    <td><%= @github_user.followers %></td>
-                    <td><%= @github_user.following %></td>
-                  </tr>
-                </table>
-              </div>
-              <div class="flex">
-                <div>
-                  <div class="text-white flex">
-                    <Icons.company />
-                    <h2><%= @github_user.company %></h2>
-                  </div>
-                  <div class="text-white flex">
-                    <Icons.website />
-                    <h2><%= @github_user.html_url %></h2>
-                  </div>
-                </div>
-
-                <div>
-                  <div class="text-white flex">
-                    <Icons.location />
-                    <h2><%= @github_user.location %></h2>
-                  </div>
-                  <div class="text-white flex">
-                    <Icons.twitter />
-                    <h2><%= @github_user.twitter_username %></h2>
+                    <div>
+                      <div class="flex items-center gap-3">
+                        <Icons.location />
+                        <UserBioHelper.location location={@github_user.location} />
+                      </div>
+                      <div class="flex items-center gap-3 mt-3">
+                        <Icons.twitter />
+                        <UserBioHelper.twitter_link twitter={@github_user.twitter_username} />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -86,9 +78,9 @@ defmodule GithubUserSearchAppWeb.Components.GithubUserSearchComponents do
 
   def search_bar(assigns) do
     ~H"""
-    <div class="background-info flex mt-4 rounded-md w-[730px] h-[69px]">
+    <div class="background-info flex mt-4 rounded-lg w-[730px] h-[69px]">
       <form phx-submit="search" class="flex items-center justify-between w-full">
-        <div class="m-2">
+        <div class="m-2 color-white">
           <Icons.search />
         </div>
         <input
@@ -97,9 +89,10 @@ defmodule GithubUserSearchAppWeb.Components.GithubUserSearchComponents do
           value={@search}
           placeholder="Search Github username.."
           autocomplete="off"
-          class=" outline-none outline-0  border-0 w-full background-info border-none"
+          class=" outline-none outline-0 text-white border-0 w-full background-info border-none"
+          valid="false"
         />
-        <button type="submit" class="p-2 m-2 background-button rounded-md text-white text-sm">
+        <button type="submit" class="p-3 m-2 background-button rounded-md text-white text-sm">
           Search
         </button>
       </form>
@@ -127,7 +120,7 @@ defmodule GithubUserSearchAppWeb.Components.GithubUserSearchComponents do
       |> Timex.format!("%a %b %Y", :strftime)
 
     ~H"""
-    <time class="text-white text-[15px]">Joined <%= datetime %></time>
+    <time class="text-[#F6F8FF] text-[15px]">Joined <%= datetime %></time>
     """
   end
 end
