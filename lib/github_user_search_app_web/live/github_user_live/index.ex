@@ -31,6 +31,7 @@ defmodule GithubUserSearchAppWeb.GithubUserLive.Index do
   end
 
   def handle_info({:run_search, search}, socket) do
+    :timer.sleep(1000)
     case UserGetter.get_github_user(search) do
       {:ok, github_user} ->
         socket = assign(socket, github_user: github_user, loading: false)
