@@ -20,8 +20,15 @@ defmodule GithubUserSearchAppWeb.Helpers.UserBioHelper do
   end
 
   def user_company(assigns) do
+    company_link =
+      assigns.company
+      |> String.split("@")
+      |> Enum.at(1)
+
     ~H"""
-    <h2 class="text-[#F6F8FF]"><%= @company %></h2>
+    <a href={"https://github.com/" <> company_link} target="_blank" class="text-[#F6F8FF]">
+      <%= @company %>
+    </a>
     """
   end
 
@@ -33,7 +40,7 @@ defmodule GithubUserSearchAppWeb.Helpers.UserBioHelper do
 
   def website(assigns) do
     ~H"""
-    <h2 class="text-[#F6F8FF]"><%= @website %></h2>
+    <a href={@website} target="_blank" class="text-[#F6F8FF]"><%= @website %></a>
     """
   end
 
@@ -57,26 +64,9 @@ defmodule GithubUserSearchAppWeb.Helpers.UserBioHelper do
 
   def twitter_link(assigns) do
     ~H"""
-    <h2 class="text-[#F6F8FF]"><%= @twitter %></h2>
-    """
-  end
-
-  def table_data(assigns) do
-    ~H"""
-    <div class="text-white items-center w-full ml-14">
-      <table class="items-center justify-start w-full  ">
-        <tr class="text-[15px] text-[#697C9A]">
-          <td>Repos</td>
-          <td>Followers</td>
-          <td>Following</td>
-        </tr>
-        <tr class="text-[#F6F8FF] font-bold text-2xl">
-          <td><%= @github_user.public_repos %></td>
-          <td><%= @github_user.followers %></td>
-          <td><%= @github_user.following %></td>
-        </tr>
-      </table>
-    </div>
+    <a href={"https://twitter.com/" <> @twitter} target="_blank" class="text-[#F6F8FF]">
+      <%= @twitter %>
+    </a>
     """
   end
 end
