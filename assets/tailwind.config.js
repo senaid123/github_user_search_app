@@ -11,7 +11,19 @@ module.exports = {
     '../lib'
   ],
   theme: {
-    extend: {},
+    screens: {
+      /* Responsive breakpoints */ 
+      sm: '375px',
+      // => @media (min-width: 375px) { ... }
+      md: '768px',
+      // => @media (min-width: 768px) { ... }
+      lg: '1240px',
+      // => @media (min-width: 1440px) { ... }
+    },
+    extend: {
+      fontFamily: {
+      "space-mono": ['Space Mono', 'monospace'],
+    },},
   },
   plugins: [
     require('@tailwindcss/forms'),
