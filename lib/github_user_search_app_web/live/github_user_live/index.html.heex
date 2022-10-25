@@ -1,3 +1,4 @@
-<div class="m-0 w-[100vw] h-[100vh] justify-center items-center flex background">
-  <GithubUserSearchComponents.github_search_component github_user={@github_user} search={@search} loading={@loading}/>
+<div id="user-search" class={"m-0 w-[100vw] h-[100vh] justify-center items-center flex relative font-mono  #{if @dark do 
+                "background" else "bg-white" end}"} >
+  <GithubUserSearchComponents.github_search_component github_user={@github_user} search={@search} loading={@loading} dark={@dark}/>
  </div>
