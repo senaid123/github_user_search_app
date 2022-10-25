@@ -43,7 +43,6 @@ defmodule GithubUserSearchAppWeb.GithubUserSearchAppWebTest do
       |> render_click()
 
       assert has_element?(index_live, ".bg-white")
-
     end
   end
 end
