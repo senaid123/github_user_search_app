@@ -11,10 +11,17 @@ defmodule GithubUserSearchAppWeb.GithubUserLive.Index do
       assign(socket,
         github_user: octocat,
         search: "",
-        loading: false
+        loading: false,
+        dark: true
       )
 
     {:ok, socket}
+  end
+
+  def handle_event("toggle_bg", _params, socket) do
+    bg_collor = socket.assigns.dark
+    socket = assign(socket, dark: !bg_collor)
+    {:noreply, socket}
   end
 
   def handle_event("search", %{"search" => search}, socket) do
@@ -32,6 +39,7 @@ defmodule GithubUserSearchAppWeb.GithubUserLive.Index do
 
   def handle_info({:run_search, search}, socket) do
     :timer.sleep(1000)
+
     case UserGetter.get_github_user(search) do
       {:ok, github_user} ->
         socket = assign(socket, github_user: github_user, loading: false)
@@ -42,8 +50,8 @@ defmodule GithubUserSearchAppWeb.GithubUserLive.Index do
 
         socket =
           socket
-          |> put_flash(:info, "No users matching \"#{search}\"")
           |> assign(gitub_user: octocat, loading: false)
+          |> put_flash(:info, "No users matching \"#{search}\"")
 
         {:noreply, socket}
     end
