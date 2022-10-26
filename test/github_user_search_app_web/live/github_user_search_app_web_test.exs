@@ -37,12 +37,14 @@ defmodule GithubUserSearchAppWeb.GithubUserSearchAppWebTest do
       {:ok, index_live, _html} = live(conn, Routes.github_user_index_path(conn, :index))
 
       assert has_element?(index_live, ".background")
+      assert has_element?(index_live, "#dark")
 
       index_live
       |> element("#toggle-bar")
       |> render_click()
 
       assert has_element?(index_live, ".bg-white")
+      assert has_element?(index_live, "#light")
     end
   end
 end
