@@ -5,14 +5,14 @@ defmodule GithubUserSearchAppWeb.Helpers.UserBioHelper do
 
   def layout_bg(%{dark: true} = assigns) do
     ~H"""
-    <p class="pr-2">LIGHT</p>
+    <p  id="dark" class="pr-2">LIGHT</p>
     <Icons.sun />
     """
   end
 
   def layout_bg(%{dark: false} = assigns) do
     ~H"""
-    <p class="pr-2 text-[#1E2A47]">DARK</p>
+    <p id="light" class="pr-2 text-[#1E2A47]">DARK</p>
     <Icons.moon />
     """
   end
