@@ -11,8 +11,8 @@ defmodule GithubUserSearchAppWeb.GithubUserLive.Index do
       assign(socket,
         github_user: octocat,
         search: "",
-        loading: false,
-        dark: true
+        dark: true,
+        found: true
       )
 
     {:ok, socket}
@@ -31,27 +31,22 @@ defmodule GithubUserSearchAppWeb.GithubUserLive.Index do
       assign(socket,
         github_user: nil,
         search: search,
-        loading: true
+        found: true
       )
 
     {:noreply, socket}
   end
 
   def handle_info({:run_search, search}, socket) do
-    :timer.sleep(1000)
-
     case UserGetter.get_github_user(search) do
       {:ok, github_user} ->
-        socket = assign(socket, github_user: github_user, loading: false)
+        socket = assign(socket, github_user: github_user, found: true)
         {:noreply, socket}
 
       _ ->
         {:ok, octocat} = UserGetter.get_github_user("octocat")
 
-        socket =
-          socket
-          |> assign(gitub_user: octocat, loading: false)
-          |> put_flash(:info, "No users matching \"#{search}\"")
+        socket = assign(socket, found: false, github_user: octocat)
 
         {:noreply, socket}
     end

@@ -5,14 +5,14 @@ defmodule GithubUserSearchAppWeb.Helpers.UserBioHelper do
 
   def layout_bg(%{dark: true} = assigns) do
     ~H"""
-    <p  id="dark" class="pr-2">LIGHT</p>
+    <p id="dark" class="pr-2 hover:text-[#697C9A]">LIGHT</p>
     <Icons.sun />
     """
   end
 
   def layout_bg(%{dark: false} = assigns) do
     ~H"""
-    <p id="light" class="pr-2 text-[#1E2A47]">DARK</p>
+    <p id="light" class="pr-2 text-[#1E2A47] hover:text-[#2B3442]">DARK</p>
     <Icons.moon />
     """
   end
@@ -25,7 +25,15 @@ defmodule GithubUserSearchAppWeb.Helpers.UserBioHelper do
 
   def user_bio(assigns) do
     ~H"""
-    <h2 class={if @dark do "text-[#F6F8FF]" else "text-[#697C9A]" end}><%= @bio %></h2>
+    <h2 class={
+      if @dark do
+        "text-[#F6F8FF]"
+      else
+        "text-[#697C9A]"
+      end
+    }>
+      <%= @bio %>
+    </h2>
     """
   end
 
@@ -56,7 +64,13 @@ defmodule GithubUserSearchAppWeb.Helpers.UserBioHelper do
 
   def website(assigns) do
     ~H"""
-    <a href={@website} target="_blank"><%= @website %></a>
+    <a
+      href={@website}
+      class={"hover:border-b-[1px] border-white #{if !@dark, do: "border-[#697C9A]"}"}
+      target="_blank"
+    >
+      <%= @website %>
+    </a>
     """
   end
 
