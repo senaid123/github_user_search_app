@@ -33,6 +33,7 @@ defmodule GithubUserSearchApp.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:mox, "~> 1.0", only: :test},
       {:dotenv, "~> 3.0.0", only: [:dev, :test]},
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
       {:finch, "~> 0.13"},

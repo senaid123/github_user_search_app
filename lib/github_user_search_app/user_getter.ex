@@ -1,4 +1,6 @@
 defmodule GithubUserSearchApp.UserGetter do
+  @behaviour GithubUserSearchApp.UserGetterBehaviour
+
   alias GithubUserSearchApp.Helpers.UserGeterHelper
 
   def get_github_user(data) do
