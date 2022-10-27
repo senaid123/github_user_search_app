@@ -117,7 +117,7 @@ defmodule GithubUserSearchAppWeb.Components.GithubUserSearchComponents do
           valid="false"
         />
         <%= if !@found do %>
-          <div class="text-[14x] text-red-500 mr-10">
+          <div id="not-found" class="text-[14x] text-red-500 mr-10">
             No results
           </div>
         <% end %>

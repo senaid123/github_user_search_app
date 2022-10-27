@@ -32,6 +32,21 @@ defmodule GithubUserSearchAppWeb.GithubUserSearchAppWebTest do
     end
   end
 
+  describe "user gets no results after invalid search" do
+    test "users try to invalid search", %{conn: conn} do
+      {ok, index_live, _html} = live(conn, Routes.github_user_index_path(conn, :index))
+
+      refute has_element?(index_live, "#not-found")
+
+      index_live
+      |> form("#form", %{search: "oioeiwori234i324o"})
+      |> render_submit()
+
+      assert has_element?(index_live, "#not-found")
+
+    end
+  end
+
   describe "user change background" do
     test "user click on light toggle area", %{conn: conn} do
       {:ok, index_live, _html} = live(conn, Routes.github_user_index_path(conn, :index))
