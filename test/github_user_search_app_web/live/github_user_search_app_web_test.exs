@@ -43,7 +43,6 @@ defmodule GithubUserSearchAppWeb.GithubUserSearchAppWebTest do
       |> render_submit()
 
       assert has_element?(index_live, "#not-found")
-
     end
   end
 
