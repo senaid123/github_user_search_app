@@ -1,4 +1,4 @@
 defmodule GithubUserSearchApp.UserGetterBehaviour do
   @moduledoc false
-  @callback get_github_user(binary()) :: {:ok, any()} | {:error, any()}
+  @callback get_github_user(binary()) :: {:ok, []} | {:error, %Finch.Response{}}
 end
