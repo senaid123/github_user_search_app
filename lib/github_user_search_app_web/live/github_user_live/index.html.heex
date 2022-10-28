@@ -8,10 +8,56 @@
     end}"
   }
 >
-  <GithubUserSearchComponents.github_search_component
-    github_user={@github_user}
-    search={@search}
-    dark={@dark}
-    found={@found}
-  />
+  <div class="">
+    <GithubUserSearchComponents.nav_top dark={@dark} />
+    <GithubUserSearchComponents.search_bar search={@search} dark={@dark} found={@found} />
+
+    <%= if @github_user do %>
+      <div class={
+        "font-mono relative bg-[#1E2A47] lg:h-[419px] lg:w-[730px] md:h-[481px] md:w-[573px] sm:h-[517px] sm:w-[327px] rounded-lg #{if !@dark, do: "bg-[#ffff] shadow-lg"}"
+      }>
+        <div class="lg:m-8 md:m-8 sm:m-6 relative">
+          <GithubUserSearchComponents.user_bio_top github_user={@github_user} dark={@dark} />
+          <div class="lg:text-[15px] md:text-[12px] sm:text-[12px] md:mt-4 lg:hidden md:flex md:w-full md:mx-4 sm:pt-4 sm:flex sm:w-full">
+            <UserBioHelper.user_bio bio={@github_user.bio} dark={@dark} />
+          </div>
+          <div class="w-full h-full flex items-center justify-center ">
+            <div class="h-[185px] w-[480px] lg:ml-[14%]">
+              <div class={
+                "bg-[#141D2F] flex items-center lg:mt-6 md:mt-6 sm:mt-4 sm:mx-2 py-5 rounded-lg #{if !@dark, do: "bg-[#F8F8FF] shadow-lg"}"
+              }>
+                <GithubUserSearchComponents.table_data github_user={@github_user} dark={@dark} />
+              </div>
+              <div class={
+                "relative lg:flex lg:text-[15px] md:text-[13px] sm:text-[13px]  md:flex items-center lg:justify-between md:justify-start w-full text-center lg:mt-8 md:my-10 sm:mt-4 p-2 text-[#F6F8FF] text-[15px]
+                              #{if !@dark, do: "text-[#697C9A]"}"
+              }>
+                <div class="md:mr-14 lg:mr-0 sm:mr-0">
+                  <div class="flex items-center gap-3">
+                    <Icons.location />
+                    <UserBioHelper.location location={@github_user.location} />
+                  </div>
+                  <div class="flex items-center gap-3 lg:mt-3 md:mt-3 sm:mt-3">
+                    <Icons.website />
+                    <UserBioHelper.website dark={@dark} website={@github_user.html_url} />
+                  </div>
+                </div>
+
+                <div class="sm:mt-3 lg:mt-0 md:mt-0">
+                  <div class="flex items-center gap-3">
+                    <Icons.twitter />
+                    <UserBioHelper.twitter_link twitter={@github_user.twitter_username} />
+                  </div>
+                  <div class="flex items-center gap-3 mt-3">
+                    <Icons.company />
+                    <UserBioHelper.user_company company={@github_user.company} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
