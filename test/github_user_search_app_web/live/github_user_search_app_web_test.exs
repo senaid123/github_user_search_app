@@ -1,5 +1,5 @@
 defmodule GithubUserSearchAppWeb.GithubUserSearchAppWebTest do
-  use GithubUserSearchAppWeb.ConnCase, async: true
+  use GithubUserSearchAppWeb.ConnCase
 
   import Phoenix.ConnTest
   import Phoenix.LiveViewTest
@@ -16,7 +16,7 @@ defmodule GithubUserSearchAppWeb.GithubUserSearchAppWebTest do
     end
   end
 
-  describe "user search page after search" do
+  describe "user page after search" do
     test "user can search github account", %{conn: conn} do
       {:ok, index_live, _html} = live(conn, Routes.github_user_index_path(conn, :index))
 
