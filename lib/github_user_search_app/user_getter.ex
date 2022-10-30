@@ -1,4 +1,8 @@
 defmodule GithubUserSearchApp.UserGetter do
+  @moduledoc """
+  Handles getting user from github clinet, depending on response transforms data into json format or returns an error.
+  Extracts necessary data from response with parse_data/1 function
+  """
   @behaviour GithubUserSearchApp.UserGetterBehaviour
   alias GithubUserSearchApp.Helpers.UserGeterHelper
 
@@ -15,7 +19,7 @@ defmodule GithubUserSearchApp.UserGetter do
     end
   end
 
-  def parse_data(data) do
+  defp parse_data(data) do
     %{
       "avatar_url" => avatar_url,
       "bio" => bio,

@@ -1,4 +1,8 @@
 defmodule GithubUserSearchAppWeb.Helpers.UserBioHelper do
+  @moduledoc """
+  This module returns data to app depending on pattern matching
+  """
+
   use GithubUserSearchAppWeb, :component
 
   alias GithubUserSearchAppWeb.GithubUserLive.Icons

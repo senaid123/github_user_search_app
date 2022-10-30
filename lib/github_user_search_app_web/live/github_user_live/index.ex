@@ -1,4 +1,7 @@
 defmodule GithubUserSearchAppWeb.GithubUserLive.Index do
+  @moduledoc """
+  Displays search page with octocat example, handles github user profile searches
+  """
   use GithubUserSearchAppWeb, :live_view
   use Phoenix.HTML
 

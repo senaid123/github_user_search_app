@@ -1,4 +1,8 @@
 defmodule GithubUserSearchAppWeb.GithubUserLive.Icons do
+  @moduledoc """
+  Icon module
+  """
+
   use GithubUserSearchAppWeb, :component
 
   def search(assigns) do

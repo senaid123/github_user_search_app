@@ -1,4 +1,7 @@
 defmodule GithubUserSearchAppWeb.Components.GithubUserSearchComponents do
+  @moduledoc """
+  Component that contains components that are included in main app, search bar, navigation, etc.
+  """
   use GithubUserSearchAppWeb, :component
 
   alias GithubUserSearchAppWeb.GithubUserLive.Icons
