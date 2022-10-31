@@ -101,7 +101,9 @@ defmodule GithubUserSearchAppWeb.Components.GithubUserSearchComponents do
           <div class="block">
             <h2
               id="user-name"
-              class={"text-white font-bold text-[26px] #{if !@dark, do: "text-[#141D2F]"}"}
+              class={
+                "text-white font-bold lg:text-[26px] md:text-[26px] sm:text-[22px] #{if !@dark, do: "text-[#141D2F]"}"
+              }
             >
               <%= @github_user.name %>
             </h2>
@@ -120,6 +122,32 @@ defmodule GithubUserSearchAppWeb.Components.GithubUserSearchComponents do
         <div class="lg:text-[15px] lg:mt-3 lg:flex md:hidden sm:hidden">
           <UserBioHelper.user_bio bio={@github_user.bio} dark={@dark} />
         </div>
+      </div>
+    </div>
+    """
+  end
+
+  def user_info_bottom(assigns) do
+    ~H"""
+    <div class="md:mr-14 lg:mr-0 sm:mr-0">
+      <div class="flex items-center gap-3">
+        <Icons.location />
+        <UserBioHelper.location location={@github_user.location} />
+      </div>
+      <div class="flex items-center gap-3 lg:mt-3 md:mt-3 sm:mt-3">
+        <Icons.website />
+        <UserBioHelper.website dark={@dark} website={@github_user.html_url} />
+      </div>
+    </div>
+
+    <div class="sm:mt-3 lg:mt-0 md:mt-0">
+      <div class="flex items-center gap-3">
+        <Icons.twitter />
+        <UserBioHelper.twitter_link twitter={@github_user.twitter_username} />
+      </div>
+      <div class="flex items-center gap-3 mt-3">
+        <Icons.company />
+        <UserBioHelper.user_company company={@github_user.company} />
       </div>
     </div>
     """

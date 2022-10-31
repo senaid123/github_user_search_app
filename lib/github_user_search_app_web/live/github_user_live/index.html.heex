@@ -24,35 +24,26 @@
           <div class="w-full h-full flex items-center justify-center ">
             <div class="h-[185px] w-[480px] lg:ml-[14%]">
               <div class={
-                "bg-[#141D2F] flex items-center lg:mt-6 md:mt-6 sm:mt-4 sm:mx-2 py-5 rounded-lg #{if !@dark, do: "bg-[#F8F8FF] shadow-lg"}"
+                "flex items-center lg:mt-6 md:mt-6 sm:mt-4 sm:mx-2 py-5 rounded-lg #{if @dark do
+                  "bg-[#141D2F]"
+                else
+                  "bg-[#F8F8FF] shadow-lg"
+                end}"
               }>
                 <GithubUserSearchComponents.table_data github_user={@github_user} dark={@dark} />
               </div>
               <div class={
-                "relative lg:flex lg:text-[15px] md:text-[13px] sm:text-[13px]  md:flex items-center lg:justify-between md:justify-start w-full text-center lg:mt-8 md:my-10 sm:mt-4 p-2 text-[#F6F8FF] text-[15px]
-                              #{if !@dark, do: "text-[#697C9A]"}"
+                "relative lg:flex lg:text-[15px] md:text-[13px] sm:text-[13px]  md:flex items-center lg:justify-between md:justify-start w-full text-center lg:mt-8 md:my-10 sm:mt-4 p-2  text-[15px]
+                              #{if @dark do
+                  "text-[#F6F8FF]"
+                else
+                  "text-[#697C9A]"
+                end}"
               }>
-                <div class="md:mr-14 lg:mr-0 sm:mr-0">
-                  <div class="flex items-center gap-3">
-                    <Icons.location />
-                    <UserBioHelper.location location={@github_user.location} />
-                  </div>
-                  <div class="flex items-center gap-3 lg:mt-3 md:mt-3 sm:mt-3">
-                    <Icons.website />
-                    <UserBioHelper.website dark={@dark} website={@github_user.html_url} />
-                  </div>
-                </div>
-
-                <div class="sm:mt-3 lg:mt-0 md:mt-0">
-                  <div class="flex items-center gap-3">
-                    <Icons.twitter />
-                    <UserBioHelper.twitter_link twitter={@github_user.twitter_username} />
-                  </div>
-                  <div class="flex items-center gap-3 mt-3">
-                    <Icons.company />
-                    <UserBioHelper.user_company company={@github_user.company} />
-                  </div>
-                </div>
+                <GithubUserSearchComponents.user_info_bottom
+                  dark={@dark}
+                  github_user={@github_user}
+                />
               </div>
             </div>
           </div>
