@@ -17,7 +17,7 @@
         "font-mono relative bg-[#1E2A47] lg:h-[419px] lg:w-[730px] md:h-[481px] md:w-[573px] sm:h-[517px] sm:w-[327px] rounded-lg #{if !@dark, do: "bg-[#ffff] shadow-lg"}"
       }>
         <div class="lg:m-8 md:m-8 sm:m-6 relative">
-          <GithubUserSearchComponents.user_bio_top github_user={@github_user} dark={@dark} />
+          <GithubUserSearchComponents.user_info_top github_user={@github_user} dark={@dark} />
           <div class="lg:text-[15px] md:text-[12px] sm:text-[12px] md:mt-4 lg:hidden md:flex md:w-full md:mx-4 sm:pt-4 sm:flex sm:w-full">
             <UserBioHelper.user_bio bio={@github_user.bio} dark={@dark} />
           </div>
@@ -30,7 +30,7 @@
                   "bg-[#F8F8FF] shadow-lg"
                 end}"
               }>
-                <GithubUserSearchComponents.table_data github_user={@github_user} dark={@dark} />
+                <GithubUserSearchComponents.user_table_data github_user={@github_user} dark={@dark} />
               </div>
               <div class={
                 "relative lg:flex lg:text-[14px] md:text-[13px] sm:text-[13px]  md:flex items-center lg:justify-between md:justify-start w-full text-center lg:mt-8 md:my-10 sm:mt-4 p-2  text-[15px]

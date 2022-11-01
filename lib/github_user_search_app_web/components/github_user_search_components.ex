@@ -70,7 +70,7 @@ defmodule GithubUserSearchAppWeb.Components.GithubUserSearchComponents do
     """
   end
 
-  def table_data(assigns) do
+  def user_table_data(assigns) do
     ~H"""
     <div class="items-center w-full">
       <table class="items-center justify-start w-full text-center">
@@ -89,7 +89,7 @@ defmodule GithubUserSearchAppWeb.Components.GithubUserSearchComponents do
     """
   end
 
-  def user_bio_top(assigns) do
+  def user_info_top(assigns) do
     ~H"""
     <div class="flex">
       <img
