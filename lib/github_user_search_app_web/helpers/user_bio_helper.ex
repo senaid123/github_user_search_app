@@ -60,7 +60,7 @@ defmodule GithubUserSearchAppWeb.Helpers.UserBioHelper do
     """
   end
 
-  def website(%{website: nil} = assigns) do
+  def website(%{blog: ""} = assigns) do
     ~H"""
     <h2 class="text-[#697C9A]">Not available</h2>
     """
@@ -69,11 +69,11 @@ defmodule GithubUserSearchAppWeb.Helpers.UserBioHelper do
   def website(assigns) do
     ~H"""
     <a
-      href={@website}
+      href={@blog}
       class={"hover:border-b-[1px] border-white #{if !@dark, do: "border-[#697C9A]"}"}
       target="_blank"
     >
-      <%= @website %>
+      <%= @blog %>
     </a>
     """
   end

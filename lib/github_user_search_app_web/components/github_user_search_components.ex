@@ -136,7 +136,7 @@ defmodule GithubUserSearchAppWeb.Components.GithubUserSearchComponents do
       </div>
       <div class="flex items-center gap-3 lg:mt-3 md:mt-3 sm:mt-3">
         <Icons.website />
-        <UserBioHelper.website dark={@dark} website={@github_user.html_url} />
+        <UserBioHelper.website dark={@dark} blog={@github_user.blog} />
       </div>
     </div>
 

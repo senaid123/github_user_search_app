@@ -8,7 +8,6 @@ defmodule GithubUserSearchApp.UserGetter do
 
   def get_github_user(data) do
     json_data = UserGeterHelper.get_user(data)
-
     with {:ok, %{status: 200, body: body}} <- json_data,
          {:ok, items} = Jason.decode(body) do
       items = parse_data(items)
@@ -20,6 +19,8 @@ defmodule GithubUserSearchApp.UserGetter do
   end
 
   defp parse_data(data) do
+    IO.inspect(data)
+
     %{
       "avatar_url" => avatar_url,
       "bio" => bio,
@@ -32,7 +33,8 @@ defmodule GithubUserSearchApp.UserGetter do
       "login" => user_name,
       "name" => full_name,
       "public_repos" => public_repos,
-      "twitter_username" => twitter_username
+      "twitter_username" => twitter_username,
+      "blog" => blog
     } = data
 
     %{
@@ -47,7 +49,8 @@ defmodule GithubUserSearchApp.UserGetter do
       login: user_name,
       name: full_name,
       public_repos: public_repos,
-      twitter_username: twitter_username
+      twitter_username: twitter_username,
+      blog: blog
     }
   end
 end
