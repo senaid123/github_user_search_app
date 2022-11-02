@@ -1,6 +1,13 @@
 # GithubUserSearchApp
 
-To start your Phoenix server:
+
+You can checkout the application on:
+
+https://senaid-search-user-app.fly.dev/
+
+or
+
+you can start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
   * Create and migrate your database with `mix ecto.setup`
