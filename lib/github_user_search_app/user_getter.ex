@@ -19,8 +19,6 @@ defmodule GithubUserSearchApp.UserGetter do
   end
 
   defp parse_data(data) do
-    IO.inspect(data)
-
     %{
       "avatar_url" => avatar_url,
       "bio" => bio,
