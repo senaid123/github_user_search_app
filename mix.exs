@@ -33,6 +33,9 @@ defmodule GithubUserSearchApp.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:sobelow, "~> 0.8", only: [:dev, :test], runtime: false},
+      {:mix_audit, "~> 2.0", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
       {:mox, "~> 1.0", only: :test},
       {:dotenv, "~> 3.0.0", only: [:dev, :test]},
@@ -70,7 +73,33 @@ defmodule GithubUserSearchApp.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
-      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"]
+      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"],
+      ci: [
+        "ci.deps_and_security",
+        "ci.formatting",
+        "ci.code_quality",
+        "ci.test"
+        # "ci.migrations"
+      ],
+      "ci.code_quality": [
+        "compile --force --warnings-as-errors",
+        "credo --strict",
+        "dialyzer"
+      ],
+      "ci.deps_and_security": [
+        "deps.unlock --check-unused",
+        "deps.audit",
+        "hex.audit",
+        "sobelow --config .sobelow-conf"
+      ],
+      "ci.formatting": ["format --check-formatted", "cmd --cd assets npx prettier -c .."],
+      "ci.migrations": ["ecto.migrate --quiet", "ecto.rollback --all --quiet"],
+      "ci.test": [
+        "ecto.create --quiet",
+        "ecto.migrate --quiet",
+        "test --cover --warnings-as-errors"
+      ],
+      prettier: ["cmd --cd assets npx prettier -w .."]
     ]
   end
 end
