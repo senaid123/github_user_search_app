@@ -5,12 +5,12 @@ defmodule GithubUserSearchAppWeb.GithubUserLive.Index do
   use GithubUserSearchAppWeb, :live_view
   use Phoenix.HTML
 
-  alias GithubUserSearchApp.UserGetter
+  alias GithubUserSearchApp.GithubHttpClient
   alias GithubUserSearchAppWeb.Components.GithubUserSearchComponents
   alias GithubUserSearchAppWeb.Helpers.UserBioHelper
 
   def mount(_params, _session, socket) do
-    {:ok, octocat} = UserGetter.get_github_user("octocat")
+    {:ok, octocat} = GithubHttpClient.search_user("octocat")
 
     socket =
       assign(socket,
@@ -43,13 +43,13 @@ defmodule GithubUserSearchAppWeb.GithubUserLive.Index do
   end
 
   def handle_info({:run_search, search}, socket) do
-    case UserGetter.get_github_user(search) do
+    case GithubHttpClient.search_user(search) do
       {:ok, github_user} ->
         socket = assign(socket, github_user: github_user, found: true)
         {:noreply, socket}
 
       _ ->
-        {:ok, octocat} = UserGetter.get_github_user("octocat")
+        {:ok, octocat} = GithubHttpClient.search_user("octocat")
 
         socket = assign(socket, found: false, github_user: octocat)
 
