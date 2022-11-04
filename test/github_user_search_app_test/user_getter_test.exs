@@ -44,7 +44,7 @@ defmodule GithubUserSearchAppTest.UserGetterTest do
         {:ok, user_data}
       end)
 
-      {:ok, result} = GithubHttpClient.search_user("octocat")
+      {_, result} = GithubHttpClient.search_user("octocat")
 
       assert result.avatar_url == "https://avatars.githubusercontent.com/u/583231?v=4"
       assert result.bio == nil

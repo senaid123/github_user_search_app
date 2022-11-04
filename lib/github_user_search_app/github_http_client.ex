@@ -6,13 +6,17 @@ defmodule GithubUserSearchApp.GithubHttpClient do
   def api_client, do: Application.get_env(:github_user_search_app, :api_client)
 
   def search_user(user) do
-    with {:ok, %{status: 200, body: body}} <- api_client().get_user(user),
-         {:ok, items} = Jason.decode(body) do
-      items = parse_data(items)
+    response = api_client().get_user(user)
 
-      {:ok, items}
-    else
-      err -> err
+    case response do
+      {:ok, %{status: 200, body: body}} ->
+        {:ok, items} = Jason.decode(body)
+        items = parse_data(items)
+
+        {:ok, items}
+
+      {_, response} ->
+        {:error, response}
     end
   end
 
