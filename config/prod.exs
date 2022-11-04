@@ -48,3 +48,4 @@ config :logger, level: :info
 #       force_ssl: [hsts: true]
 #
 # Check `Plug.SSL` for all available options in `force_ssl`.
+config :github_user_search_app, api_client: GithubUserSearchApp.Helpers.UserGeterHelper
